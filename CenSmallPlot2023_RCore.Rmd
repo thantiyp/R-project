@@ -4,7 +4,7 @@ author: "thantiyp"
 date: "2023-09-12"
 output: html_document
 ---
-PRAI = TRY
+
 ```{r}
 library(dplyr)
 library(openxlsx)
