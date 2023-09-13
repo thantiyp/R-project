@@ -19,57 +19,27 @@ rm(list=ls())
 ```{r}
 ## OGS1
 OGS1_S1 <- read.xlsx("OGS1_Census3.xlsx", sheet = 1) 
-OGS1_S1$ExactDate <- convertToDate(OGS1_S1$ExactDate)
-
 OGS1_S2 <- read.xlsx("OGS1_Census3.xlsx", sheet = 2)
-OGS1_S2$ExactDate <- convertToDate(OGS1_S2$ExactDate)
-
 OGS1_S3 <- read.xlsx("OGS1_Census3.xlsx", sheet = 3)
-OGS1_S3$ExactDate <- convertToDate(OGS1_S3$ExactDate)
 
 ## OGS2
 OGS2_S1 <- read.xlsx("OGS2_Census3.xlsx", sheet = 1)
-OGS2_S1$Date_III <- convertToDate(OGS2_S1$Date_III) 
-OGS2_S1 <- OGS2_S1 %>%
-  rename(ExactDate = "Date_III")
-
 OGS2_S2 <- read.xlsx("OGS2_Census3.xlsx", sheet = 2)   # this sheet is add data 
-OGS2_S2$Date_III <- convertToDate(OGS2_S2$Date_III) 
-OGS2_S2 <- OGS2_S2 %>%
-  rename(ExactDate = "Date_III")
-
 OGS2_S3 <- read.xlsx("OGS2_Census3.xlsx", sheet = 3)
-OGS2_S3$ExactDate <- convertToDate(OGS2_S3$ExactDate)
 
 ##SES1
 SES1_S1 <- read.xlsx("SES1_Census3.xlsx", sheet = 1)
-SES1_S1$ExactDate <- convertToDate(SES1_S1$ExactDate) 
-
 SES1_S2 <- read.xlsx("SES1_Census3.xlsx", sheet = 2)
-SES1_S2$ExactDate <- convertToDate(SES1_S2$ExactDate) 
-
 SES1_S3 <- read.xlsx("SES1_Census3.xlsx", sheet = 3)
-SES1_S3$ExactDate <- convertToDate(SES1_S3$ExactDate)
 
 ##SES2
 SES2_S1 <- read.xlsx("SES2_Census3.xlsx", sheet = 1)
-SES2_S1$ExactDate <- convertToDate(SES2_S1$ExactDate) 
-
 SES2_S2 <- read.xlsx("SES2_Census3.xlsx", sheet = 2)
-SES2_S2$ExactDate <- convertToDate(SES2_S2$ExactDate) 
-
 SES2_S3 <- read.xlsx("SES2_Census3.xlsx", sheet = 3)
-SES2_S3$ExactDate <- convertToDate(SES2_S3$ExactDate) 
 
 ##SES3
 SES3_S1 <- read.xlsx("SES3_Census3.xlsx", sheet = 1)
-SES3_S1$Date <- convertToDate(SES3_S1$Date) 
-SES3_S1 <- SES3_S1 %>%
-  rename(ExactDate = "Date") 
-
 SES3_S2 <- read.xlsx("SES3_Census3.xlsx", sheet = 2)   # sheet recruit
-SES3_S2$ExactDate <- convertToDate(SES3_S2$ExactDate) 
-
 
 ##SES5
 SES5_S1 <- read.xlsx("SecCensus4_Update2022.xlsx", sheet = 1)
@@ -108,7 +78,7 @@ SIS5_S3 <- read.xlsx("SIS5_Census2.xlsx", sheet = 3)
 
 ```
 
-# Edit X,Y 
+# clean file sheet of recruit data
 ```{r}
 ## OGS1
 OGS1_re <- OGS1_S3 %>%
@@ -135,12 +105,86 @@ SES1_re <- SES1_S3 %>%
    select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
 ##SES2
-SES2_re <- SES3_S2 %>%
-  rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y")%>%
+SES2_re <- SES2_S3 %>%
+  rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
   unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
+
+##SES3
+SES3_re <- SES3_S2 %>%
+  rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y") %>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+  select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
+
+##SIS1
+SIS1_re <- SIS1_S3 %>%
+  rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+  select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
+
+##SIS2
+SIS2_re <- SIS2_S3 %>%
+  rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
+  mutate(minusY = as.numeric(minusY)) %>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+  select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
+
+#SIS3
+SIS3_re <- SIS3_S3 %>%
+  rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+  select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
+
+#SIS4
+SIS4_re <- SIS4_S3 %>%
+  rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y") %>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(Tag, c("Col","Tag"), sep="-", na.rm = TRUE, remove = T) %>%
+  select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
+
+#SIS5
+SIS5_re <- SIS5_S3 %>%
+  rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y") %>%
+  mutate(minusY = as.numeric(minusY)) %>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(Tag, c("Col","Tag"), sep="-", na.rm = TRUE, remove = T) %>%
+  select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
+
+##SES5
+#SES5_re <- SES5_S3 
+
+
+# rename column name 
+dataset1 <- rbind(OGS1_re, OGS2_re, SES1_re, SES2_re, SES3_re, SIS1_re, SIS2_re, SIS3_re) 
+dataset1 <- dataset1 %>%
+  rename(DBH = "DBH_Cen3", Code = "Codes_Cen3", HOM = "HOM_Cen3")
+
+dataset2 <- rbind(SIS4_re, SIS5_re)
+dataset2 <- dataset2 %>%
+  rename(DBH = "DBH_Cen2", Code = "Codes_Cen2", HOM = "HOM_Cen2")
+
+# combine recruit of all plot 
+bind <- rbind(dataset1, dataset2) 
+#bind$ExactDate <- convertToDate(bind$ExactDate)
+
+CenSmall2023_recruit <- bind %>%
+  mutate_at(c("Census","StemTag","Quadrat","SX","SY","DBH","HOM"), as.numeric)
+
+  
 
 ```
 
