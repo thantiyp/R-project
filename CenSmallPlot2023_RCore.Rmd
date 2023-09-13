@@ -67,7 +67,7 @@ SES3_S1$Date <- convertToDate(SES3_S1$Date)
 SES3_S1 <- SES3_S1 %>%
   rename(ExactDate = "Date") 
 
-SES3_S2 <- read.xlsx("SES3_Census3.xlsx", sheet = 2)   # sheet recurit
+SES3_S2 <- read.xlsx("SES3_Census3.xlsx", sheet = 2)   # sheet recruit
 SES3_S2$ExactDate <- convertToDate(SES3_S2$ExactDate) 
 
 
