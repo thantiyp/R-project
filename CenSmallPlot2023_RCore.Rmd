@@ -11,11 +11,11 @@ library(openxlsx)
 library(tidyverse)
 
 
-setwd("D:/R-project/")
+setwd("D:/Tree Census/R-project/")
 rm(list=ls())
 ```
 
-#read file and convertToDate
+# Read file and convertToDate
 ```{r}
 ## OGS1
 OGS1_S1 <- read.xlsx("OGS1_Census3.xlsx", sheet = 1) 
@@ -43,18 +43,33 @@ OGS2_S3$ExactDate <- convertToDate(OGS2_S3$ExactDate)
 
 ##SES1
 SES1_S1 <- read.xlsx("SES1_Census3.xlsx", sheet = 1)
+SES1_S1$ExactDate <- convertToDate(SES1_S1$ExactDate) 
+
 SES1_S2 <- read.xlsx("SES1_Census3.xlsx", sheet = 2)
+SES1_S2$ExactDate <- convertToDate(SES1_S2$ExactDate) 
+
 SES1_S3 <- read.xlsx("SES1_Census3.xlsx", sheet = 3)
+SES1_S3$ExactDate <- convertToDate(SES1_S3$ExactDate)
 
 ##SES2
 SES2_S1 <- read.xlsx("SES2_Census3.xlsx", sheet = 1)
+SES2_S1$ExactDate <- convertToDate(SES2_S1$ExactDate) 
+
 SES2_S2 <- read.xlsx("SES2_Census3.xlsx", sheet = 2)
+SES2_S2$ExactDate <- convertToDate(SES2_S2$ExactDate) 
+
 SES2_S3 <- read.xlsx("SES2_Census3.xlsx", sheet = 3)
+SES2_S3$ExactDate <- convertToDate(SES2_S3$ExactDate) 
 
 ##SES3
 SES3_S1 <- read.xlsx("SES3_Census3.xlsx", sheet = 1)
-SES3_S2 <- read.xlsx("SES3_Census3.xlsx", sheet = 2)
-SES3_S3 <- read.xlsx("SES3_Census3.xlsx", sheet = 3)
+SES3_S1$Date <- convertToDate(SES3_S1$Date) 
+SES3_S1 <- SES3_S1 %>%
+  rename(ExactDate = "Date") 
+
+SES3_S2 <- read.xlsx("SES3_Census3.xlsx", sheet = 2)   # sheet recurit
+SES3_S2$ExactDate <- convertToDate(SES3_S2$ExactDate) 
+
 
 ##SES5
 SES5_S1 <- read.xlsx("SecCensus4_Update2022.xlsx", sheet = 1)
@@ -110,8 +125,22 @@ OGS2_re <- OGS2_S3 %>%
   unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
    select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
-  
 
+##SES1
+SES1_re <- SES1_S3 %>%
+  rename(X1="_X", Y1="_Y", minusX="_-X", minusY="_-Y") %>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
+
+##SES2
+SES2_re <- SES3_S2 %>%
+  rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y")%>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+  select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
 ```
 
