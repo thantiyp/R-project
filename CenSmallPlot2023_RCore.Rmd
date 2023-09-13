@@ -11,7 +11,7 @@ library(openxlsx)
 library(tidyverse)
 
 
-setwd("D:/Tree Census/R-project/")
+setwd("D:/R-project/")
 rm(list=ls())
 ```
 
@@ -97,13 +97,20 @@ SIS5_S3 <- read.xlsx("SIS5_Census2.xlsx", sheet = 3)
 ```{r}
 ## OGS1
 OGS1_re <- OGS1_S3 %>%
-  rename(X1="_X",Y1="_Y",minusX ="_-X", minusY="_-Y",) %>%
-  mutate(X2=5-minusX, Y2=5-minusY) %>%
+  rename(X1 = "_X", Y1 = "_Y", minusX  = "_-X", minusY = "_-Y") %>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
   unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
-  select(-c("X1","minusX","Y1","minusY","X2","Y2"))
+  select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
 ##OGS2
+OGS2_re <- OGS2_S3 %>%
+  rename(X1="_X", Y1="_Y", minusX="_-X", minusY="_-Y") %>%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
+  
 
 
 ```
