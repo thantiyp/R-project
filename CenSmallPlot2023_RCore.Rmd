@@ -15,17 +15,31 @@ setwd("D:/Tree Census/R-project/")
 rm(list=ls())
 ```
 
+#read file and convertToDate
 ```{r}
-#read file
 ## OGS1
-OGS1_S1 <- read.xlsx("OGS1_Census3.xlsx", sheet = 1)
+OGS1_S1 <- read.xlsx("OGS1_Census3.xlsx", sheet = 1) 
+OGS1_S1$ExactDate <- convertToDate(OGS1_S1$ExactDate)
+
 OGS1_S2 <- read.xlsx("OGS1_Census3.xlsx", sheet = 2)
+OGS1_S2$ExactDate <- convertToDate(OGS1_S2$ExactDate)
+
 OGS1_S3 <- read.xlsx("OGS1_Census3.xlsx", sheet = 3)
+OGS1_S3$ExactDate <- convertToDate(OGS1_S3$ExactDate)
 
 ## OGS2
 OGS2_S1 <- read.xlsx("OGS2_Census3.xlsx", sheet = 1)
-OGS2_S2 <- read.xlsx("OGS2_Census3.xlsx", sheet = 2)
+OGS2_S1$Date_III <- convertToDate(OGS2_S1$Date_III) 
+OGS2_S1 <- OGS2_S1 %>%
+  rename(ExactDate = "Date_III")
+
+OGS2_S2 <- read.xlsx("OGS2_Census3.xlsx", sheet = 2)   # this sheet is add data 
+OGS2_S2$Date_III <- convertToDate(OGS2_S2$Date_III) 
+OGS2_S2 <- OGS2_S2 %>%
+  rename(ExactDate = "Date_III")
+
 OGS2_S3 <- read.xlsx("OGS2_Census3.xlsx", sheet = 3)
+OGS2_S3$ExactDate <- convertToDate(OGS2_S3$ExactDate)
 
 ##SES1
 SES1_S1 <- read.xlsx("SES1_Census3.xlsx", sheet = 1)
@@ -76,6 +90,21 @@ SIS4_S3 <- read.xlsx("SIS4_Census2.xlsx", sheet = 3)
 SIS5_S1 <- read.xlsx("SIS5_Census2.xlsx", sheet = 1)
 SIS5_S2 <- read.xlsx("SIS5_Census2.xlsx", sheet = 2)
 SIS5_S3 <- read.xlsx("SIS5_Census2.xlsx", sheet = 3)
+
+```
+
+# Edit X,Y 
+```{r}
+## OGS1
+OGS1_re <- OGS1_S3 %>%
+  rename(X1="_X",Y1="_Y",minusX ="_-X", minusY="_-Y",) %>%
+  mutate(X2=5-minusX, Y2=5-minusY) %>%
+  unite(SX, c("X1","X2"), na.rm = TRUE, remove = FALSE) %>%
+  unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
+  select(-c("X1","minusX","Y1","minusY","X2","Y2"))
+
+##OGS2
+
 
 ```
 
