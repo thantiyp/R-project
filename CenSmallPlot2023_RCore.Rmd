@@ -164,9 +164,9 @@ SIS5_re <- SIS5_S3 %>%
   unite(Tag, c("Col","Tag"), sep="-", na.rm = TRUE, remove = T) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
+
 ##SES5
 #SES5_re <- SES5_S3 
-
 
 # rename column name 
 dataset1 <- rbind(OGS1_re, OGS2_re, SES1_re, SES2_re, SES3_re, SIS1_re, SIS2_re, SIS3_re) 
@@ -178,10 +178,10 @@ dataset2 <- dataset2 %>%
   rename(DBH = "DBH_Cen2", Code = "Codes_Cen2", HOM = "HOM_Cen2")
 
 # combine recruit of all plot 
-bind <- rbind(dataset1, dataset2) 
-#bind$ExactDate <- convertToDate(bind$ExactDate)
+combine <- rbind(dataset1, dataset2) 
+combine$ExactDate <- convertToDate(combine$ExactDate)
 
-CenSmall2023_recruit <- bind %>%
+CenSmall2023_recruit <- combine %>%
   mutate_at(c("Census","StemTag","Quadrat","SX","SY","DBH","HOM"), as.numeric)
 
   
