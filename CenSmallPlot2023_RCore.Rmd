@@ -88,7 +88,7 @@ OGS1_re <- OGS1_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-##OGS2
+## OGS2
 OGS2_re <- OGS2_S3 %>%
   rename(X1="_X", Y1="_Y", minusX="_-X", minusY="_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -96,7 +96,7 @@ OGS2_re <- OGS2_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
    select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-##SES1
+## SES1
 SES1_re <- SES1_S3 %>%
   rename(X1="_X", Y1="_Y", minusX="_-X", minusY="_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -104,7 +104,7 @@ SES1_re <- SES1_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
    select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-##SES2
+## SES2
 SES2_re <- SES2_S3 %>%
   rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -112,7 +112,7 @@ SES2_re <- SES2_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-##SES3
+## SES3
 SES3_re <- SES3_S2 %>%
   rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -120,7 +120,7 @@ SES3_re <- SES3_S2 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-##SIS1
+## SIS1
 SIS1_re <- SIS1_S3 %>%
   rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -128,7 +128,7 @@ SIS1_re <- SIS1_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-##SIS2
+## SIS2
 SIS2_re <- SIS2_S3 %>%
   rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(minusY = as.numeric(minusY)) %>%
@@ -137,7 +137,7 @@ SIS2_re <- SIS2_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-#SIS3
+## SIS3
 SIS3_re <- SIS3_S3 %>%
   rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -145,7 +145,7 @@ SIS3_re <- SIS3_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-#SIS4
+## SIS4
 SIS4_re <- SIS4_S3 %>%
   rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -154,7 +154,7 @@ SIS4_re <- SIS4_S3 %>%
   unite(Tag, c("Col","Tag"), sep="-", na.rm = TRUE, remove = T) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-#SIS5
+## SIS5
 SIS5_re <- SIS5_S3 %>%
   rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(minusY = as.numeric(minusY)) %>%
@@ -165,26 +165,47 @@ SIS5_re <- SIS5_S3 %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
 
-##SES5
+## SES5
 #SES5_re <- SES5_S3 
 
 # rename column name 
-dataset1 <- rbind(OGS1_re, OGS2_re, SES1_re, SES2_re, SES3_re, SIS1_re, SIS2_re, SIS3_re) 
-dataset1 <- dataset1 %>%
+dataset1_re <- rbind(OGS1_re, OGS2_re, SES1_re, SES2_re, SES3_re, SIS1_re, SIS2_re, SIS3_re) 
+dataset1_re <- dataset1_re %>%
   rename(DBH = "DBH_Cen3", Code = "Codes_Cen3", HOM = "HOM_Cen3")
 
-dataset2 <- rbind(SIS4_re, SIS5_re)
-dataset2 <- dataset2 %>%
+dataset2_re <- rbind(SIS4_re, SIS5_re)
+dataset2_re <- dataset2_re %>%
   rename(DBH = "DBH_Cen2", Code = "Codes_Cen2", HOM = "HOM_Cen2")
 
 # combine recruit of all plot 
-combine <- rbind(dataset1, dataset2) 
-combine$ExactDate <- convertToDate(combine$ExactDate)
+combine_recruit <- rbind(dataset1_re, dataset2_re) 
+combine_recruit$ExactDate <- convertToDate(combine_recruit$ExactDate)
 
-CenSmall2023_recruit <- combine %>%
+Cen_recruit <- combine_recruit %>%
   mutate_at(c("Census","StemTag","Quadrat","SX","SY","DBH","HOM"), as.numeric)
 
+```
+
+# clean file sheet of OldTree and AddStem
+```{r}
+## OGS1
+OGS1_oldTrees <- OGS1_S1 %>%
+  select(-(DBH_Cen2:Codes_Cen2)) 
+
+OGS1_old_add <- rbind(OGS1_oldTrees, OGS1_S2)
+
+OGS1_2023 <- OGS1_old_add %>%
+  mutate(SX=round(Qx%%5,digits = 2),SY=round(Qy%%5,digits = 2)) %>%
+  select(-Qx, -Qy, -Recorders)
   
+## OGS2
+OGS2_2023 <- OGS2_S1 %>%
+  mutate(Tree_Id = as.character(Tree_Id)) %>%
+  mutate(SX=round(QX%%5,digits = 2),SY=round(QY%%5,digits = 2)) %>%
+  unite(Remarks, c("Remarks_III","Tree_Id_corrected"),sep = ";ID", na.rm = TRUE, remove = F) 
+
+
+
 
 ```
 
