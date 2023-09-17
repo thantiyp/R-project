@@ -15,7 +15,7 @@ setwd("D:/Tree Census/R-project/")
 rm(list=ls())
 ```
 
-# Read file and convertToDate
+# Read file 
 ```{r}
 ## OGS1
 OGS1_S1 <- read.xlsx("OGS1_Census3.xlsx", sheet = 1) 
@@ -192,19 +192,36 @@ Cen_recruit <- combine_recruit %>%
 OGS1_oldTrees <- OGS1_S1 %>%
   select(-(DBH_Cen2:Codes_Cen2)) 
 
-OGS1_old_add <- rbind(OGS1_oldTrees, OGS1_S2)
+OGS1_combine <- rbind(OGS1_oldTrees, OGS1_S2)
 
-OGS1_2023 <- OGS1_old_add %>%
+OGS1_2023 <- OGS1_combine %>%
   mutate(SX=round(Qx%%5,digits = 2),SY=round(Qy%%5,digits = 2)) %>%
   select(-Qx, -Qy, -Recorders)
   
 ## OGS2
 OGS2_2023 <- OGS2_S1 %>%
   mutate(Tree_Id = as.character(Tree_Id)) %>%
-  mutate(SX=round(QX%%5,digits = 2),SY=round(QY%%5,digits = 2)) %>%
-  unite(Remarks, c("Remarks_III","Tree_Id_corrected"),sep = ";ID", na.rm = TRUE, remove = F) 
-
-
+  unite(Remarks, c("Remarks_III","Tree_Id_corrected"),sep = ";ID", na.rm = TRUE, remove = F) %>% 
+  select(Census:Plot, Quad:QY, Dbh_aIII:Date_III, -Remarks_III) %>%
+  rename("1" = Dbh_aIII,
+         "2" = Dbh_bIII,
+         "3" = Dbh_cIII,
+         "4" = Dbh_dIII,
+         "5" = Dbh_eIII,
+         "6" = Dbh_fIII,
+         "7" = Dbh_gIII,
+         "8" = Dbh_hIII,
+         "9" = Dbh_iIII,
+         Tag = Tree_Id,
+         GenusSpecies = Latest.name,
+         Codes_Cen3 = Codes_III,
+         HOM_Cen3 = HOM_III,
+         ExactDate = Date_III) %>%
+  mutate_at(c(9:17), as.numeric, na.rm = TRUE) %>%
+    pivot_longer(c(9:17),
+               names_to = "StemTag",
+               values_to = "DBH_Cen3") %>%
+  filter(DBH_Cen3!="NA")
 
 
 ```
