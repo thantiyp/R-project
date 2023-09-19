@@ -192,14 +192,12 @@ Cen_recruit <- combine_recruit %>%
 OGS1_oldTrees <- OGS1_S1 %>%
   select(-(DBH_Cen2:Codes_Cen2)) 
 
-OGS1_combine <- rbind(OGS1_oldTrees, OGS1_S2)
+OGS1_combine <- rbind(OGS1_oldTrees, OGS1_S2) %>%
+  select(-Recorders)
 
-OGS1_2023 <- OGS1_combine %>%
-  mutate(SX=round(Qx%%5,digits = 2),SY=round(Qy%%5,digits = 2)) %>%
-  select(-Qx, -Qy, -Recorders)
   
 ## OGS2
-OGS2_2023 <- OGS2_S1 %>%
+OGS2_combine <- OGS2_S1 %>%
   mutate(Tree_Id = as.character(Tree_Id)) %>%
   unite(Remarks, c("Remarks_III","Tree_Id_corrected"),sep = ";ID", na.rm = TRUE, remove = F) %>% 
   select(Census:Plot, Quad:QY, Dbh_aIII:Date_III, -Remarks_III) %>%
@@ -214,14 +212,75 @@ OGS2_2023 <- OGS2_S1 %>%
          "9" = Dbh_iIII,
          Tag = Tree_Id,
          GenusSpecies = Latest.name,
+         Quadrat = Quad,
+         Qx =QX,
+         Qy =QY,
          Codes_Cen3 = Codes_III,
          HOM_Cen3 = HOM_III,
          ExactDate = Date_III) %>%
   mutate_at(c(9:17), as.numeric, na.rm = TRUE) %>%
-    pivot_longer(c(9:17),
+  pivot_longer(c(9:17),
                names_to = "StemTag",
                values_to = "DBH_Cen3") %>%
   filter(DBH_Cen3!="NA")
+
+## SES1
+SES1_oldTrees <- SES1_S1 %>%
+  select(-(DBH_Cen2:Codes_Cen2)) 
+
+SES1_combine <- rbind(SES1_oldTrees, SES1_S2) %>%
+  select(-Recorders)
+
+## SES2
+SES2_oldTrees <- SES2_S1 %>%
+  select(-(DBH_Cen2:Codes_Cen2))
+
+SES2_combine <- rbind(SES2_oldTrees, SES2_S2) %>%
+  select(-Recorders)
+
+## SES3
+SES3_combine <- SES3_S1 %>%
+  mutate(Tree_Id = as.character(Tree_Id)) %>%
+  select(Census:QY, Dbh_aIII:Date) %>%
+  rename("1" = Dbh_aIII,
+         "2" = Dbh_bIII,
+         "3" = Dbh_cIII,
+         "4" = Dbh_dIII,
+         "5" = Dbh_eIII,
+         "6" = Dbh_fIII,
+         "7" = Dbh_gIII,
+         "8" = Dbh_hIII,
+         Tag = Tree_Id,
+         GenusSpecies = Latest.name,
+         Quadrat = Quad,
+         Qx = QX,
+         Qy = QY,
+         Codes_Cen3 = Codes,
+         HOM_Cen3 = HOM,
+         ExactDate = Date) %>%
+    mutate_at(c(9:16), as.numeric, na.rm = TRUE) %>%
+    pivot_longer(c(9:16),
+               names_to = "StemTag",
+               values_to = "DBH_Cen3") %>%
+  filter(DBH_Cen3!="NA")
+
+## SES5
+
+## SIS1
+SIS1_oldTrees <- SIS1_S1 %>%
+  select(-(DBH_Cen2:Codes_Cen2)) %>%
+  rename(Tag_correct = Tag_corrected)
+
+SIS1_combine <- rbind(SIS1_oldTrees, SIS1_S2) %>%
+  unite(Remarks, c("Remarks","Tag_correct"), sep = "; TreeID", na.rm = TRUE, remove = T) %>%
+  select(-Recorders) 
+
+
+
+CensusSmallPlot_combine <- rbind(OGS1_combine, OGS2_combine, SES1_combine, SES2_combine, SES3_combine,
+                                 SIS1_combine)
+
+
 
 
 ```
