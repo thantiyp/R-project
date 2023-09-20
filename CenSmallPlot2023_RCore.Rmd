@@ -42,9 +42,9 @@ SES3_S1 <- read.xlsx("SES3_Census3.xlsx", sheet = 1)
 SES3_S2 <- read.xlsx("SES3_Census3.xlsx", sheet = 2)   # sheet recruit
 
 ##SES5
-SES5_S1 <- read.xlsx("SecCensus4_Update2022.xlsx", sheet = 1)
-SES5_S2 <- read.xlsx("SecCensus4_Update2022.xlsx", sheet = 2)
-SES5_S3 <- read.xlsx("SecCensus4_Update2022.xlsx", sheet = 3)
+SES5_S1 <- read.xlsx("SES5_MST_Census42023.xlsx", sheet = 1)
+SES5_S2 <- read.xlsx("SES5_MST_Census42023.xlsx", sheet = 2)
+SES5_S3 <- read.xlsx("SES5_MST_Census42023.xlsx", sheet = 3)
 
 ##SIS1
 SIS1_S1 <- read.xlsx("SIS1_Census3.xlsx", sheet = 1)
@@ -120,6 +120,15 @@ SES3_re <- SES3_S2 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
+## SES5
+SES5_re <- SES5_S3 %>%
+  rename(SX = "_X", 
+         SY = "_Y",
+         DBH = "DBH_Cen4", 
+         Code = "Codes_Cen4", 
+         HOM = "HOM_Cen4") %>%
+  select(-Recorders)
+
 ## SIS1
 SIS1_re <- SIS1_S3 %>%
   rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
@@ -165,20 +174,21 @@ SIS5_re <- SIS5_S3 %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
 
-## SES5
-#SES5_re <- SES5_S3 
-
 # rename column name 
 dataset1_re <- rbind(OGS1_re, OGS2_re, SES1_re, SES2_re, SES3_re, SIS1_re, SIS2_re, SIS3_re) 
 dataset1_re <- dataset1_re %>%
-  rename(DBH = "DBH_Cen3", Code = "Codes_Cen3", HOM = "HOM_Cen3")
+  rename(DBH = "DBH_Cen3", 
+         Code = "Codes_Cen3", 
+         HOM = "HOM_Cen3")
 
 dataset2_re <- rbind(SIS4_re, SIS5_re)
 dataset2_re <- dataset2_re %>%
-  rename(DBH = "DBH_Cen2", Code = "Codes_Cen2", HOM = "HOM_Cen2")
+  rename(DBH = "DBH_Cen2", 
+         Code = "Codes_Cen2", 
+         HOM = "HOM_Cen2")
 
 # combine recruit of all plot 
-combine_recruit <- rbind(dataset1_re, dataset2_re) 
+combine_recruit <- rbind(dataset1_re, dataset2_re, SES5_re) 
 combine_recruit$ExactDate <- convertToDate(combine_recruit$ExactDate)
 
 Cen_recruit <- combine_recruit %>%
@@ -265,6 +275,12 @@ SES3_combine <- SES3_S1 %>%
   filter(DBH_Cen3!="NA")
 
 ## SES5
+SES2_oldTrees <- SES5_S1 %>%
+  select(-(DBH_Cen2:Codes_Cen2))
+
+SES2_combine <- rbind(SES2_oldTrees, SES2_S2) %>%
+  select(-Recorders)
+
 
 ## SIS1
 SIS1_oldTrees <- SIS1_S1 %>%
