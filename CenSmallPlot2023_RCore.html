@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="thantiyp" />
+<meta name="author" content="Thantiyp" />
 
 <meta name="date" content="2023-09-12" />
 
@@ -351,7 +351,7 @@ display: none;
 
 
 <h1 class="title toc-ignore">Tree Census of Small Plots</h1>
-<h4 class="author">thantiyp</h4>
+<h4 class="author">Thantiyp</h4>
 <h4 class="date">2023-09-12</h4>
 
 </div>
@@ -379,66 +379,382 @@ library(tidyverse)</code></pre>
 ## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <pre class="r"><code>setwd(&quot;D:/Tree Census/R-project/&quot;)
 rm(list=ls())</code></pre>
-<pre class="r"><code>#read file
-## OGS1
-OGS1_S1 &lt;- read.xlsx(&quot;OGS1_Census3.xlsx&quot;, sheet = 1)
+<div id="read-file" class="section level1">
+<h1>Read file</h1>
+<pre class="r"><code># OGS1
+OGS1_S1 &lt;- read.xlsx(&quot;OGS1_Census3.xlsx&quot;, sheet = 1) 
 OGS1_S2 &lt;- read.xlsx(&quot;OGS1_Census3.xlsx&quot;, sheet = 2)
 OGS1_S3 &lt;- read.xlsx(&quot;OGS1_Census3.xlsx&quot;, sheet = 3)
 
-## OGS2
+# OGS2
 OGS2_S1 &lt;- read.xlsx(&quot;OGS2_Census3.xlsx&quot;, sheet = 1)
-OGS2_S2 &lt;- read.xlsx(&quot;OGS2_Census3.xlsx&quot;, sheet = 2)
+OGS2_S2 &lt;- read.xlsx(&quot;OGS2_Census3.xlsx&quot;, sheet = 2)   # this sheet is add data 
 OGS2_S3 &lt;- read.xlsx(&quot;OGS2_Census3.xlsx&quot;, sheet = 3)
 
-##SES1
+# SES1
 SES1_S1 &lt;- read.xlsx(&quot;SES1_Census3.xlsx&quot;, sheet = 1)
 SES1_S2 &lt;- read.xlsx(&quot;SES1_Census3.xlsx&quot;, sheet = 2)
 SES1_S3 &lt;- read.xlsx(&quot;SES1_Census3.xlsx&quot;, sheet = 3)
 
-##SES2
+# SES2
 SES2_S1 &lt;- read.xlsx(&quot;SES2_Census3.xlsx&quot;, sheet = 1)
 SES2_S2 &lt;- read.xlsx(&quot;SES2_Census3.xlsx&quot;, sheet = 2)
 SES2_S3 &lt;- read.xlsx(&quot;SES2_Census3.xlsx&quot;, sheet = 3)
 
-##SES3
+# SES3
 SES3_S1 &lt;- read.xlsx(&quot;SES3_Census3.xlsx&quot;, sheet = 1)
-SES3_S2 &lt;- read.xlsx(&quot;SES3_Census3.xlsx&quot;, sheet = 2)
-SES3_S3 &lt;- read.xlsx(&quot;SES3_Census3.xlsx&quot;, sheet = 3)
+SES3_S2 &lt;- read.xlsx(&quot;SES3_Census3.xlsx&quot;, sheet = 2)   # sheet recruit
 
-##SES5
-SES5_S1 &lt;- read.xlsx(&quot;SecCensus4_Update2022.xlsx&quot;, sheet = 1)
-SES5_S2 &lt;- read.xlsx(&quot;SecCensus4_Update2022.xlsx&quot;, sheet = 2)
-SES5_S3 &lt;- read.xlsx(&quot;SecCensus4_Update2022.xlsx&quot;, sheet = 3)
+# SES5
+SES5_S1 &lt;- read.xlsx(&quot;SES5_MST_Census42023.xlsx&quot;, sheet = 1)
+SES5_S2 &lt;- read.xlsx(&quot;SES5_MST_Census42023.xlsx&quot;, sheet = 2)
+SES5_S3 &lt;- read.xlsx(&quot;SES5_MST_Census42023.xlsx&quot;, sheet = 3)
 
-##SIS1
+# SIS1
 SIS1_S1 &lt;- read.xlsx(&quot;SIS1_Census3.xlsx&quot;, sheet = 1)
 SIS1_S2 &lt;- read.xlsx(&quot;SIS1_Census3.xlsx&quot;, sheet = 2)
 SIS1_S3 &lt;- read.xlsx(&quot;SIS1_Census3.xlsx&quot;, sheet = 3)
 
-##SIS2
+# SIS2
 SIS2_S1 &lt;- read.xlsx(&quot;SIS2_Census3.xlsx&quot;, sheet = 1)
 SIS2_S2 &lt;- read.xlsx(&quot;SIS2_Census3.xlsx&quot;, sheet = 2)
 SIS2_S3 &lt;- read.xlsx(&quot;SIS2_Census3.xlsx&quot;, sheet = 3)
 
-##SIS3
+# SIS3
 SIS3_S1 &lt;- read.xlsx(&quot;SIS3_Census3.xlsx&quot;, sheet = 1)
 SIS3_S2 &lt;- read.xlsx(&quot;SIS3_Census3.xlsx&quot;, sheet = 2)
 SIS3_S3 &lt;- read.xlsx(&quot;SIS3_Census3.xlsx&quot;, sheet = 3)
 
-##SIS3NewCol
+# SIS3NewCol
 SIS3NewCol_S1 &lt;- read.xlsx(&quot;SIS3_Census3_NewColumn.xlsx&quot;, sheet = 1)
 SIS3NewCol_S2 &lt;- read.xlsx(&quot;SIS3_Census3_NewColumn.xlsx&quot;, sheet = 2)
 SIS3NewCol_S3 &lt;- read.xlsx(&quot;SIS3_Census3_NewColumn.xlsx&quot;, sheet = 3)
 
-##SIS4
+# SIS4
 SIS4_S1 &lt;- read.xlsx(&quot;SIS4_Census2.xlsx&quot;, sheet = 1)
 SIS4_S2 &lt;- read.xlsx(&quot;SIS4_Census2.xlsx&quot;, sheet = 2)
 SIS4_S3 &lt;- read.xlsx(&quot;SIS4_Census2.xlsx&quot;, sheet = 3)
 
-##SIS5
+# SIS5
 SIS5_S1 &lt;- read.xlsx(&quot;SIS5_Census2.xlsx&quot;, sheet = 1)
 SIS5_S2 &lt;- read.xlsx(&quot;SIS5_Census2.xlsx&quot;, sheet = 2)
 SIS5_S3 &lt;- read.xlsx(&quot;SIS5_Census2.xlsx&quot;, sheet = 3)</code></pre>
+</div>
+<div id="clean-file-sheet-of-recruits" class="section level1">
+<h1>Clean file sheet of Recruits</h1>
+<pre class="r"><code># OGS1
+OGS1_re &lt;- OGS1_S3 %&gt;%
+  rename(X1 = &quot;_X&quot;, Y1 = &quot;_Y&quot;, minusX  = &quot;_-X&quot;, minusY = &quot;_-Y&quot;) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+# OGS2
+OGS2_re &lt;- OGS2_S3 %&gt;%
+  rename(X1=&quot;_X&quot;, Y1=&quot;_Y&quot;, minusX=&quot;_-X&quot;, minusY=&quot;_-Y&quot;) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+   select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+# SES1
+SES1_re &lt;- SES1_S3 %&gt;%
+  rename(X1=&quot;_X&quot;, Y1=&quot;_Y&quot;, minusX=&quot;_-X&quot;, minusY=&quot;_-Y&quot;) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+   select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+# SES2
+SES2_re &lt;- SES2_S3 %&gt;%
+  rename(X1 = &quot;_X&quot;, Y1 = &quot;Y&quot;, minusX = &quot;_-X&quot;, minusY = &quot;_-Y&quot;) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+# SES3
+SES3_re &lt;- SES3_S2 %&gt;%
+  rename(X1 = &quot;_X&quot;, Y1 = &quot;_Y&quot;, minusX = &quot;_-X&quot;, minusY = &quot;_-Y&quot;) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+# SES5
+SES5_re &lt;- SES5_S3 %&gt;%
+  rename(SX = &quot;_X&quot;, 
+         SY = &quot;_Y&quot;,
+         DBH = &quot;DBH_Cen4&quot;, 
+         Code = &quot;Codes_Cen4&quot;, 
+         HOM = &quot;HOM_Cen4&quot;) %&gt;%
+  select(-Recorders)
+
+# SIS1
+SIS1_re &lt;- SIS1_S3 %&gt;%
+  rename(X1 = &quot;_X&quot;, Y1 = &quot;Y&quot;, minusX = &quot;_-X&quot;, minusY = &quot;_-Y&quot;) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+# SIS2
+SIS2_re &lt;- SIS2_S3 %&gt;%
+  rename(X1 = &quot;_X&quot;, Y1 = &quot;Y&quot;, minusX = &quot;_-X&quot;, minusY = &quot;_-Y&quot;) %&gt;%
+  mutate(minusY = as.numeric(minusY)) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+# SIS3
+SIS3_re &lt;- SIS3_S3 %&gt;%
+  rename(X1 = &quot;_X&quot;, Y1 = &quot;Y&quot;, minusX = &quot;_-X&quot;, minusY = &quot;_-Y&quot;) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+# SIS4
+SIS4_re &lt;- SIS4_S3 %&gt;%
+  rename(X1 = &quot;_X&quot;, Y1 = &quot;_Y&quot;, minusX = &quot;_-X&quot;, minusY = &quot;_-Y&quot;) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(Tag, c(&quot;Col&quot;,&quot;Tag&quot;), sep=&quot;-&quot;, na.rm = TRUE, remove = T) %&gt;%
+  select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+# SIS5
+SIS5_re &lt;- SIS5_S3 %&gt;%
+  rename(X1 = &quot;_X&quot;, Y1 = &quot;_Y&quot;, minusX = &quot;_-X&quot;, minusY = &quot;_-Y&quot;) %&gt;%
+  mutate(minusY = as.numeric(minusY)) %&gt;%
+  mutate(X2 = 5-minusX, Y2 = 5-minusY) %&gt;%
+  unite(SX, c(&quot;X1&quot;,&quot;X2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(SY, c(&quot;Y1&quot;,&quot;Y2&quot;), na.rm = TRUE, remove = FALSE) %&gt;%
+  unite(Tag, c(&quot;Col&quot;,&quot;Tag&quot;), sep=&quot;-&quot;, na.rm = TRUE, remove = T) %&gt;%
+  select(-c(&quot;X1&quot;,&quot;minusX&quot;,&quot;Y1&quot;,&quot;minusY&quot;,&quot;X2&quot;,&quot;Y2&quot;,&quot;Recorders&quot;))
+
+
+# Rename column name 
+#------------------------------
+dataset1_re &lt;- rbind(OGS1_re, OGS2_re, SES1_re, SES2_re, SES3_re, SIS1_re, SIS2_re, SIS3_re) 
+dataset1_re &lt;- dataset1_re %&gt;%
+  rename(DBH = &quot;DBH_Cen3&quot;, 
+         Code = &quot;Codes_Cen3&quot;, 
+         HOM = &quot;HOM_Cen3&quot;)
+
+dataset2_re &lt;- rbind(SIS4_re, SIS5_re)
+dataset2_re &lt;- dataset2_re %&gt;%
+  rename(DBH = &quot;DBH_Cen2&quot;, 
+         Code = &quot;Codes_Cen2&quot;, 
+         HOM = &quot;HOM_Cen2&quot;)
+
+
+# Combine recruit of all plot 
+#------------------------------
+combine_recruit &lt;- rbind(dataset1_re, dataset2_re, SES5_re) 
+combine_recruit$ExactDate &lt;- convertToDate(combine_recruit$ExactDate)
+
+Cen_Recruit &lt;- combine_recruit %&gt;%
+  mutate_at(c(&quot;Census&quot;,&quot;StemTag&quot;,&quot;Quadrat&quot;,&quot;SX&quot;,&quot;SY&quot;,&quot;DBH&quot;,&quot;HOM&quot;), as.numeric)</code></pre>
+<pre><code>## Warning: There were 2 warnings in `mutate()`.
+## The first warning was:
+## ℹ In argument: `SX = .Primitive(&quot;as.double&quot;)(SX)`.
+## Caused by warning:
+## ! NAs introduced by coercion
+## ℹ Run `dplyr::last_dplyr_warnings()` to see the 1 remaining warning.</code></pre>
+</div>
+<div id="clean-file-sheet-of-oldtree-and-addstem" class="section level1">
+<h1>Clean file sheet of OldTree and AddStem</h1>
+<pre class="r"><code># OGS1
+OGS1_oldTrees &lt;- OGS1_S1 %&gt;%
+  select(-(DBH_Cen2:Codes_Cen2)) 
+
+OGS1_combine &lt;- rbind(OGS1_oldTrees, OGS1_S2)
+
+
+# OGS2
+OGS2_oldTrees &lt;- OGS2_S1 %&gt;%
+  select(Census:Plot, Quad:QY, Dbh_aIII:Tree_Id_corrected)
+
+## Add column in OGS2_S2 
+OGS2_S2$Dbh_dIII &lt;- &quot;&quot;
+OGS2_S2$Dbh_eIII &lt;- &quot;&quot;
+OGS2_S2$Dbh_fIII &lt;- &quot;&quot;
+OGS2_S2$Dbh_gIII &lt;- &quot;&quot;
+OGS2_S2$Dbh_hIII &lt;- &quot;&quot;
+OGS2_S2$Dbh_iIII &lt;- &quot;&quot;
+OGS2_S2$Tree_Id_corrected &lt;- &quot;&quot;
+
+OGS2_S2_add &lt;- OGS2_S2 %&gt;%
+  select(-Row, -Column, -Dbh_aII) 
+
+## Rename column names and edit formart
+OGS2_combine &lt;- rbind(OGS2_oldTrees, OGS2_S2_add) %&gt;%
+  mutate(Tree_Id = as.character(Tree_Id)) %&gt;%
+  unite(Remarks, c(&quot;Remarks_III&quot;,&quot;Tree_Id_corrected&quot;), sep = &quot;; TreeID&quot;, na.rm = TRUE, remove = T) %&gt;%
+  rename(&quot;1&quot; = Dbh_aIII,
+         &quot;2&quot; = Dbh_bIII,
+         &quot;3&quot; = Dbh_cIII,
+         &quot;4&quot; = Dbh_dIII,
+         &quot;5&quot; = Dbh_eIII,
+         &quot;6&quot; = Dbh_fIII,
+         &quot;7&quot; = Dbh_gIII,
+         &quot;8&quot; = Dbh_hIII,
+         &quot;9&quot; = Dbh_iIII,
+         Tag = Tree_Id,
+         GenusSpecies = Latest.name,
+         Quadrat = Quad,
+         Qx = QX,
+         Qy = QY,
+         Codes_Cen3 = Codes_III,
+         HOM_Cen3 = HOM_III,
+         ExactDate = Date_III,
+         Recorders = Recode) %&gt;%
+  mutate_at(c(9:17), as.numeric, na.rm = TRUE) %&gt;%
+  pivot_longer(c(9:17),
+               names_to = &quot;StemTag&quot;,
+               values_to = &quot;DBH_Cen3&quot;) %&gt;%
+  filter(DBH_Cen3!=&quot;NA&quot;)
+
+
+# SES1
+SES1_oldTrees &lt;- SES1_S1 %&gt;%
+  select(-(DBH_Cen2:Codes_Cen2)) 
+
+SES1_combine &lt;- rbind(SES1_oldTrees, SES1_S2) 
+
+
+# SES2
+SES2_oldTrees &lt;- SES2_S1 %&gt;%
+  select(-(DBH_Cen2:Codes_Cen2))
+
+SES2_combine &lt;- rbind(SES2_oldTrees, SES2_S2) 
+
+
+# SES3
+SES3_combine &lt;- SES3_S1 %&gt;%
+  mutate(Tree_Id = as.character(Tree_Id)) %&gt;%
+  select(Census:QY, Dbh_aIII:Recorder) %&gt;%
+  rename(&quot;1&quot; = Dbh_aIII,
+         &quot;2&quot; = Dbh_bIII,
+         &quot;3&quot; = Dbh_cIII,
+         &quot;4&quot; = Dbh_dIII,
+         &quot;5&quot; = Dbh_eIII,
+         &quot;6&quot; = Dbh_fIII,
+         &quot;7&quot; = Dbh_gIII,
+         &quot;8&quot; = Dbh_hIII,
+         Tag = Tree_Id,
+         GenusSpecies = Latest.name,
+         Quadrat = Quad,
+         Qx = QX,
+         Qy = QY,
+         Codes_Cen3 = Codes,
+         HOM_Cen3 = HOM,
+         ExactDate = Date,
+         Recorders = Recorder) %&gt;%
+    mutate_at(c(9:16), as.numeric, na.rm = TRUE) %&gt;%
+    pivot_longer(c(9:16),
+               names_to = &quot;StemTag&quot;,
+               values_to = &quot;DBH_Cen3&quot;) %&gt;%
+  filter(DBH_Cen3!=&quot;NA&quot;)
+
+
+# SES5
+SES5_oldTrees &lt;- SES5_S1 %&gt;%
+  select(-(DBH_Cen3:Codes_Cen3), -HOM_Cen3)
+
+## Rename column
+SES5_combine &lt;- rbind(SES5_oldTrees, SES5_S2) %&gt;%
+  rename(DBH_Cen3 = DBH_Cen4,
+         HOM_Cen3 = HOM_Cen4,
+         Codes_Cen3 = Codes_Cen4)
+  
+
+# SIS1
+SIS1_oldTrees &lt;- SIS1_S1 %&gt;%
+  select(-(DBH_Cen2:Codes_Cen2)) %&gt;%
+  rename(Tag_correct = Tag_corrected)
+
+SIS1_combine &lt;- rbind(SIS1_oldTrees, SIS1_S2) %&gt;%
+  unite(Remarks, c(&quot;Remarks&quot;,&quot;Tag_correct&quot;), sep = &quot;; TreeID&quot;, na.rm = TRUE, remove = T) 
+
+
+# SIS2
+SIS2_oldTrees &lt;- SIS2_S1 %&gt;%
+  select(-(DBH_Cen2:Codes_Cen2))
+
+SIS2_combine &lt;- rbind(SIS2_oldTrees, SIS2_S2) 
+
+
+# SIS3
+SIS3_oldTrees &lt;- SIS3_S1 %&gt;%
+  select(-(DBH_Cen2:Codes_Cen2))
+
+SIS3_combine &lt;- rbind(SIS3_oldTrees, SIS3_S2) %&gt;%
+  unite(Remarks, c(&quot;Remarks&quot;,&quot;Tag_corrected&quot;), sep = &quot;; TreeID&quot;, na.rm = TRUE, remove = T) 
+
+# SIS3NewCol
+SIS3NewCol_oldTrees &lt;- SIS3NewCol_S1 %&gt;%
+  select(-(DBH_Cen2:Codes_Cen2))
+
+SIS3NewCol_combine &lt;- rbind(SIS3NewCol_oldTrees, SIS3NewCol_S2)
+
+
+# SIS4
+SIS4_oldTrees &lt;- SIS4_S1 %&gt;%
+  select(-Col, -Tags, -DBH_Cen1) %&gt;%
+  rename(&quot;Col-Tag&quot; = &quot;Col-Tags&quot;)
+
+SIS4_combine &lt;- rbind(SIS4_oldTrees, SIS4_S2) %&gt;%
+  rename(Tag = &quot;Col-Tag&quot;,
+         DBH_Cen3 = DBH_Cen2,
+         Codes_Cen3 = Codes_Cen2,
+         HOM_Cen3 = HOM_Cen2)
+
+# SIS5
+SIS5_oldTrees &lt;- SIS5_S1 %&gt;%
+  select(-Col, -Tags, -DBH_Cen1) %&gt;%
+  rename(&quot;Col-Tag&quot; = &quot;Col-Tags&quot;)
+
+SIS5_combine &lt;- rbind(SIS5_oldTrees, SIS5_S2) %&gt;%
+  rename(Tag = &quot;Col-Tag&quot;,
+         DBH_Cen3 = DBH_Cen2,
+         Codes_Cen3 = Codes_Cen2,
+         HOM_Cen3 = HOM_Cen2)
+
+
+# Combine old tree of all plot 
+#------------------------------
+combine_oldTree &lt;- rbind(OGS1_combine, OGS2_combine, 
+                                 SES1_combine, SES2_combine, SES3_combine, SES5_combine,
+                                 SIS1_combine, SIS2_combine, SIS3_combine, SIS3NewCol_combine, SIS4_combine, SIS5_combine)
+
+# read file Mnemonic
+df.Mnemonic &lt;- read.csv(&quot;SpeciesTrees_UpdateMay2023.csv&quot;)
+
+# Rename column
+#------------------------------
+Cen_OldTree &lt;- combine_oldTree %&gt;%
+  left_join(df.Mnemonic, by = &quot;GenusSpecies&quot;) %&gt;%
+  mutate(SX=round(Qx%%5,digits = 2),SY=round(Qy%%5,digits = 2)) %&gt;%
+  rename(DBH = DBH_Cen3,
+         Code = Codes_Cen3,
+         HOM = HOM_Cen3) %&gt;%
+  select(-(Qx:Qy),-(Recorders:ID)) </code></pre>
+</div>
+<div id="combine-census-data-for-2023" class="section level1">
+<h1>Combine census data for 2023</h1>
+<pre class="r"><code># Combine census data
+CensusSmallPlot2023 &lt;- rbind(Cen_OldTree, Cen_Recruit) 
+
+# convert to date
+CensusSmallPlot2023$ExactDate &lt;- convertToDateTime(CensusSmallPlot2023$ExactDate)</code></pre>
+<pre><code>## Warning in convertToDateTime(CensusSmallPlot2023$ExactDate): NAs introduced by
+## coercion</code></pre>
+<pre class="r"><code>write.csv(CensusSmallPlot2023, &quot;CensusSmallPlot2023_Cleand21Sep23.csv&quot;)</code></pre>
+</div>
 
 
 

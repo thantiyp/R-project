@@ -1,6 +1,6 @@
 ---
 title: "Tree Census of Small Plots"
-author: "thantiyp"
+author: "Thantiyp"
 date: "2023-09-12"
 output: html_document
 ---
@@ -17,70 +17,70 @@ rm(list=ls())
 
 # Read file 
 ```{r}
-## OGS1
+# OGS1
 OGS1_S1 <- read.xlsx("OGS1_Census3.xlsx", sheet = 1) 
 OGS1_S2 <- read.xlsx("OGS1_Census3.xlsx", sheet = 2)
 OGS1_S3 <- read.xlsx("OGS1_Census3.xlsx", sheet = 3)
 
-## OGS2
+# OGS2
 OGS2_S1 <- read.xlsx("OGS2_Census3.xlsx", sheet = 1)
 OGS2_S2 <- read.xlsx("OGS2_Census3.xlsx", sheet = 2)   # this sheet is add data 
 OGS2_S3 <- read.xlsx("OGS2_Census3.xlsx", sheet = 3)
 
-##SES1
+# SES1
 SES1_S1 <- read.xlsx("SES1_Census3.xlsx", sheet = 1)
 SES1_S2 <- read.xlsx("SES1_Census3.xlsx", sheet = 2)
 SES1_S3 <- read.xlsx("SES1_Census3.xlsx", sheet = 3)
 
-##SES2
+# SES2
 SES2_S1 <- read.xlsx("SES2_Census3.xlsx", sheet = 1)
 SES2_S2 <- read.xlsx("SES2_Census3.xlsx", sheet = 2)
 SES2_S3 <- read.xlsx("SES2_Census3.xlsx", sheet = 3)
 
-##SES3
+# SES3
 SES3_S1 <- read.xlsx("SES3_Census3.xlsx", sheet = 1)
 SES3_S2 <- read.xlsx("SES3_Census3.xlsx", sheet = 2)   # sheet recruit
 
-##SES5
+# SES5
 SES5_S1 <- read.xlsx("SES5_MST_Census42023.xlsx", sheet = 1)
 SES5_S2 <- read.xlsx("SES5_MST_Census42023.xlsx", sheet = 2)
 SES5_S3 <- read.xlsx("SES5_MST_Census42023.xlsx", sheet = 3)
 
-##SIS1
+# SIS1
 SIS1_S1 <- read.xlsx("SIS1_Census3.xlsx", sheet = 1)
 SIS1_S2 <- read.xlsx("SIS1_Census3.xlsx", sheet = 2)
 SIS1_S3 <- read.xlsx("SIS1_Census3.xlsx", sheet = 3)
 
-##SIS2
+# SIS2
 SIS2_S1 <- read.xlsx("SIS2_Census3.xlsx", sheet = 1)
 SIS2_S2 <- read.xlsx("SIS2_Census3.xlsx", sheet = 2)
 SIS2_S3 <- read.xlsx("SIS2_Census3.xlsx", sheet = 3)
 
-##SIS3
+# SIS3
 SIS3_S1 <- read.xlsx("SIS3_Census3.xlsx", sheet = 1)
 SIS3_S2 <- read.xlsx("SIS3_Census3.xlsx", sheet = 2)
 SIS3_S3 <- read.xlsx("SIS3_Census3.xlsx", sheet = 3)
 
-##SIS3NewCol
+# SIS3NewCol
 SIS3NewCol_S1 <- read.xlsx("SIS3_Census3_NewColumn.xlsx", sheet = 1)
 SIS3NewCol_S2 <- read.xlsx("SIS3_Census3_NewColumn.xlsx", sheet = 2)
 SIS3NewCol_S3 <- read.xlsx("SIS3_Census3_NewColumn.xlsx", sheet = 3)
 
-##SIS4
+# SIS4
 SIS4_S1 <- read.xlsx("SIS4_Census2.xlsx", sheet = 1)
 SIS4_S2 <- read.xlsx("SIS4_Census2.xlsx", sheet = 2)
 SIS4_S3 <- read.xlsx("SIS4_Census2.xlsx", sheet = 3)
 
-##SIS5
+# SIS5
 SIS5_S1 <- read.xlsx("SIS5_Census2.xlsx", sheet = 1)
 SIS5_S2 <- read.xlsx("SIS5_Census2.xlsx", sheet = 2)
 SIS5_S3 <- read.xlsx("SIS5_Census2.xlsx", sheet = 3)
 
 ```
 
-# clean file sheet of recruit data
+# Clean file sheet of Recruits
 ```{r}
-## OGS1
+# OGS1
 OGS1_re <- OGS1_S3 %>%
   rename(X1 = "_X", Y1 = "_Y", minusX  = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -88,7 +88,7 @@ OGS1_re <- OGS1_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-## OGS2
+# OGS2
 OGS2_re <- OGS2_S3 %>%
   rename(X1="_X", Y1="_Y", minusX="_-X", minusY="_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -96,7 +96,7 @@ OGS2_re <- OGS2_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
    select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-## SES1
+# SES1
 SES1_re <- SES1_S3 %>%
   rename(X1="_X", Y1="_Y", minusX="_-X", minusY="_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -104,7 +104,7 @@ SES1_re <- SES1_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
    select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-## SES2
+# SES2
 SES2_re <- SES2_S3 %>%
   rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -112,7 +112,7 @@ SES2_re <- SES2_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-## SES3
+# SES3
 SES3_re <- SES3_S2 %>%
   rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -120,7 +120,7 @@ SES3_re <- SES3_S2 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-## SES5
+# SES5
 SES5_re <- SES5_S3 %>%
   rename(SX = "_X", 
          SY = "_Y",
@@ -129,7 +129,7 @@ SES5_re <- SES5_S3 %>%
          HOM = "HOM_Cen4") %>%
   select(-Recorders)
 
-## SIS1
+# SIS1
 SIS1_re <- SIS1_S3 %>%
   rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -137,7 +137,7 @@ SIS1_re <- SIS1_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-## SIS2
+# SIS2
 SIS2_re <- SIS2_S3 %>%
   rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(minusY = as.numeric(minusY)) %>%
@@ -146,7 +146,7 @@ SIS2_re <- SIS2_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-## SIS3
+# SIS3
 SIS3_re <- SIS3_S3 %>%
   rename(X1 = "_X", Y1 = "Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -154,7 +154,7 @@ SIS3_re <- SIS3_S3 %>%
   unite(SY, c("Y1","Y2"), na.rm = TRUE, remove = FALSE) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-## SIS4
+# SIS4
 SIS4_re <- SIS4_S3 %>%
   rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(X2 = 5-minusX, Y2 = 5-minusY) %>%
@@ -163,7 +163,7 @@ SIS4_re <- SIS4_S3 %>%
   unite(Tag, c("Col","Tag"), sep="-", na.rm = TRUE, remove = T) %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
-## SIS5
+# SIS5
 SIS5_re <- SIS5_S3 %>%
   rename(X1 = "_X", Y1 = "_Y", minusX = "_-X", minusY = "_-Y") %>%
   mutate(minusY = as.numeric(minusY)) %>%
@@ -174,7 +174,8 @@ SIS5_re <- SIS5_S3 %>%
   select(-c("X1","minusX","Y1","minusY","X2","Y2","Recorders"))
 
 
-# rename column name 
+# Rename column name 
+#------------------------------
 dataset1_re <- rbind(OGS1_re, OGS2_re, SES1_re, SES2_re, SES3_re, SIS1_re, SIS2_re, SIS3_re) 
 dataset1_re <- dataset1_re %>%
   rename(DBH = "DBH_Cen3", 
@@ -187,30 +188,46 @@ dataset2_re <- dataset2_re %>%
          Code = "Codes_Cen2", 
          HOM = "HOM_Cen2")
 
-# combine recruit of all plot 
+
+# Combine recruit of all plot 
+#------------------------------
 combine_recruit <- rbind(dataset1_re, dataset2_re, SES5_re) 
 combine_recruit$ExactDate <- convertToDate(combine_recruit$ExactDate)
 
-Cen_recruit <- combine_recruit %>%
+Cen_Recruit <- combine_recruit %>%
   mutate_at(c("Census","StemTag","Quadrat","SX","SY","DBH","HOM"), as.numeric)
 
 ```
 
-# clean file sheet of OldTree and AddStem
+# Clean file sheet of OldTree and AddStem
 ```{r}
-## OGS1
+# OGS1
 OGS1_oldTrees <- OGS1_S1 %>%
   select(-(DBH_Cen2:Codes_Cen2)) 
 
-OGS1_combine <- rbind(OGS1_oldTrees, OGS1_S2) %>%
-  select(-Recorders)
+OGS1_combine <- rbind(OGS1_oldTrees, OGS1_S2)
 
-  
-## OGS2
-OGS2_combine <- OGS2_S1 %>%
+
+# OGS2
+OGS2_oldTrees <- OGS2_S1 %>%
+  select(Census:Plot, Quad:QY, Dbh_aIII:Tree_Id_corrected)
+
+## Add column in OGS2_S2 
+OGS2_S2$Dbh_dIII <- ""
+OGS2_S2$Dbh_eIII <- ""
+OGS2_S2$Dbh_fIII <- ""
+OGS2_S2$Dbh_gIII <- ""
+OGS2_S2$Dbh_hIII <- ""
+OGS2_S2$Dbh_iIII <- ""
+OGS2_S2$Tree_Id_corrected <- ""
+
+OGS2_S2_add <- OGS2_S2 %>%
+  select(-Row, -Column, -Dbh_aII) 
+
+## Rename column names and edit formart
+OGS2_combine <- rbind(OGS2_oldTrees, OGS2_S2_add) %>%
   mutate(Tree_Id = as.character(Tree_Id)) %>%
-  unite(Remarks, c("Remarks_III","Tree_Id_corrected"),sep = ";ID", na.rm = TRUE, remove = F) %>% 
-  select(Census:Plot, Quad:QY, Dbh_aIII:Date_III, -Remarks_III) %>%
+  unite(Remarks, c("Remarks_III","Tree_Id_corrected"), sep = "; TreeID", na.rm = TRUE, remove = T) %>%
   rename("1" = Dbh_aIII,
          "2" = Dbh_bIII,
          "3" = Dbh_cIII,
@@ -223,35 +240,37 @@ OGS2_combine <- OGS2_S1 %>%
          Tag = Tree_Id,
          GenusSpecies = Latest.name,
          Quadrat = Quad,
-         Qx =QX,
-         Qy =QY,
+         Qx = QX,
+         Qy = QY,
          Codes_Cen3 = Codes_III,
          HOM_Cen3 = HOM_III,
-         ExactDate = Date_III) %>%
+         ExactDate = Date_III,
+         Recorders = Recode) %>%
   mutate_at(c(9:17), as.numeric, na.rm = TRUE) %>%
   pivot_longer(c(9:17),
                names_to = "StemTag",
                values_to = "DBH_Cen3") %>%
   filter(DBH_Cen3!="NA")
 
-## SES1
+
+# SES1
 SES1_oldTrees <- SES1_S1 %>%
   select(-(DBH_Cen2:Codes_Cen2)) 
 
-SES1_combine <- rbind(SES1_oldTrees, SES1_S2) %>%
-  select(-Recorders)
+SES1_combine <- rbind(SES1_oldTrees, SES1_S2) 
 
-## SES2
+
+# SES2
 SES2_oldTrees <- SES2_S1 %>%
   select(-(DBH_Cen2:Codes_Cen2))
 
-SES2_combine <- rbind(SES2_oldTrees, SES2_S2) %>%
-  select(-Recorders)
+SES2_combine <- rbind(SES2_oldTrees, SES2_S2) 
 
-## SES3
+
+# SES3
 SES3_combine <- SES3_S1 %>%
   mutate(Tree_Id = as.character(Tree_Id)) %>%
-  select(Census:QY, Dbh_aIII:Date) %>%
+  select(Census:QY, Dbh_aIII:Recorder) %>%
   rename("1" = Dbh_aIII,
          "2" = Dbh_bIII,
          "3" = Dbh_cIII,
@@ -267,37 +286,112 @@ SES3_combine <- SES3_S1 %>%
          Qy = QY,
          Codes_Cen3 = Codes,
          HOM_Cen3 = HOM,
-         ExactDate = Date) %>%
+         ExactDate = Date,
+         Recorders = Recorder) %>%
     mutate_at(c(9:16), as.numeric, na.rm = TRUE) %>%
     pivot_longer(c(9:16),
                names_to = "StemTag",
                values_to = "DBH_Cen3") %>%
   filter(DBH_Cen3!="NA")
 
-## SES5
-SES2_oldTrees <- SES5_S1 %>%
-  select(-(DBH_Cen2:Codes_Cen2))
 
-SES2_combine <- rbind(SES2_oldTrees, SES2_S2) %>%
-  select(-Recorders)
+# SES5
+SES5_oldTrees <- SES5_S1 %>%
+  select(-(DBH_Cen3:Codes_Cen3), -HOM_Cen3)
 
+## Rename column
+SES5_combine <- rbind(SES5_oldTrees, SES5_S2) %>%
+  rename(DBH_Cen3 = DBH_Cen4,
+         HOM_Cen3 = HOM_Cen4,
+         Codes_Cen3 = Codes_Cen4)
+  
 
-## SIS1
+# SIS1
 SIS1_oldTrees <- SIS1_S1 %>%
   select(-(DBH_Cen2:Codes_Cen2)) %>%
   rename(Tag_correct = Tag_corrected)
 
 SIS1_combine <- rbind(SIS1_oldTrees, SIS1_S2) %>%
-  unite(Remarks, c("Remarks","Tag_correct"), sep = "; TreeID", na.rm = TRUE, remove = T) %>%
-  select(-Recorders) 
+  unite(Remarks, c("Remarks","Tag_correct"), sep = "; TreeID", na.rm = TRUE, remove = T) 
 
 
+# SIS2
+SIS2_oldTrees <- SIS2_S1 %>%
+  select(-(DBH_Cen2:Codes_Cen2))
 
-CensusSmallPlot_combine <- rbind(OGS1_combine, OGS2_combine, SES1_combine, SES2_combine, SES3_combine,
-                                 SIS1_combine)
+SIS2_combine <- rbind(SIS2_oldTrees, SIS2_S2) 
 
 
+# SIS3
+SIS3_oldTrees <- SIS3_S1 %>%
+  select(-(DBH_Cen2:Codes_Cen2))
 
+SIS3_combine <- rbind(SIS3_oldTrees, SIS3_S2) %>%
+  unite(Remarks, c("Remarks","Tag_corrected"), sep = "; TreeID", na.rm = TRUE, remove = T) 
+
+# SIS3NewCol
+SIS3NewCol_oldTrees <- SIS3NewCol_S1 %>%
+  select(-(DBH_Cen2:Codes_Cen2))
+
+SIS3NewCol_combine <- rbind(SIS3NewCol_oldTrees, SIS3NewCol_S2)
+
+
+# SIS4
+SIS4_oldTrees <- SIS4_S1 %>%
+  select(-Col, -Tags, -DBH_Cen1) %>%
+  rename("Col-Tag" = "Col-Tags")
+
+SIS4_combine <- rbind(SIS4_oldTrees, SIS4_S2) %>%
+  rename(Tag = "Col-Tag",
+         DBH_Cen3 = DBH_Cen2,
+         Codes_Cen3 = Codes_Cen2,
+         HOM_Cen3 = HOM_Cen2)
+
+# SIS5
+SIS5_oldTrees <- SIS5_S1 %>%
+  select(-Col, -Tags, -DBH_Cen1) %>%
+  rename("Col-Tag" = "Col-Tags")
+
+SIS5_combine <- rbind(SIS5_oldTrees, SIS5_S2) %>%
+  rename(Tag = "Col-Tag",
+         DBH_Cen3 = DBH_Cen2,
+         Codes_Cen3 = Codes_Cen2,
+         HOM_Cen3 = HOM_Cen2)
+
+
+# Combine old tree of all plot 
+#------------------------------
+combine_oldTree <- rbind(OGS1_combine, OGS2_combine, 
+                                 SES1_combine, SES2_combine, SES3_combine, SES5_combine,
+                                 SIS1_combine, SIS2_combine, SIS3_combine, SIS3NewCol_combine, SIS4_combine, SIS5_combine)
+
+# read file Mnemonic
+df.Mnemonic <- read.csv("SpeciesTrees_UpdateMay2023.csv")
+
+# Rename column
+#------------------------------
+Cen_OldTree <- combine_oldTree %>%
+  left_join(df.Mnemonic, by = "GenusSpecies") %>%
+  mutate(SX=round(Qx%%5,digits = 2),SY=round(Qy%%5,digits = 2)) %>%
+  rename(DBH = DBH_Cen3,
+         Code = Codes_Cen3,
+         HOM = HOM_Cen3) %>%
+  select(-(Qx:Qy),-(Recorders:ID)) 
+  
+
+
+```
+
+# Combine census data for 2023 
+```{r}
+# Combine census data
+CensusSmallPlot2023 <- rbind(Cen_OldTree, Cen_Recruit) 
+
+# convert to date
+CensusSmallPlot2023$ExactDate <- convertToDateTime(CensusSmallPlot2023$ExactDate)
+
+
+write.csv(CensusSmallPlot2023, "CensusSmallPlot2023_Cleand21Sep23.csv")
 
 ```
 
